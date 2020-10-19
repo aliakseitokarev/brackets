@@ -4,9 +4,10 @@ module.exports = function check(str, bracketsConfig) {
     for (let i = 0; i < str.length; i++) {
         let index = count.findIndex(el => str[i] === el);
         let configIndex = bracket.indexOf(str[i]);
-        // if (configIndex !== bracket.lastIndexOf(str[i]))
+        let configSame = bracket.lastIndexOf(str[i]);
         if (index >= 0 && configIndex % 2 === 0) {
             count[index + 1] += 1
+            if ((configIndex !== configSame) && (count[index + 1] % 2 === 0)) count[index + 1] = 0;
         } else if (index < 0 && configIndex % 2 === 0) {
             count[count.length] = str[i];
             count[count.length] = 1;
